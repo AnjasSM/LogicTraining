@@ -1,6 +1,6 @@
 arkaFood = (foodPrice, voucher, mileage, tax) => {
-    //promo = [[namaVoucher,discount,minimalBuy]]
-    let promo = [['ARKAFOOD5', 50, 50000], ['DITRAKTIRDEMY', 60, 25000]];
+    //promo = [[namaVoucher,discount,minimalBuy,maxDiscount]]
+    let promo = [['ARKAFOOD5', 50, 50000, 50000], ['DITRAKTIRDEMY', 60, 25000, 30000]];
     let perKm = 3000;
     let firstKm = 5000;
     let delivery = Math.ceil(mileage - 1.5);
@@ -9,8 +9,11 @@ arkaFood = (foodPrice, voucher, mileage, tax) => {
     let foodTax = foodPrice * (5 / 100)
 
     if (voucher === promo[0][0]) {
-        let discount = foodPrice * (promo[0][1] / 100)
-        if (foodPrice > promo[0][2]) {
+        let discount = foodPrice * (promo[0][1] / 100);
+        if (discount > promo[0][3]) {
+            discount = promo[0][3]
+        }
+        if (foodPrice >= promo[0][2]) {
             if (mileage) {
                 if (tax) {
                     totalPay = foodPrice - discount + totalDelivery + foodTax
@@ -27,9 +30,9 @@ arkaFood = (foodPrice, voucher, mileage, tax) => {
         } else {
             if (mileage) {
                 if (tax) {
-                    totalPay = foodPrice - discount + totalDelivery + foodTax
+                    totalPay = foodPrice + totalDelivery + foodTax
                 } else {
-                    totalPay = foodPrice - discount + totalDelivery
+                    totalPay = foodPrice + totalDelivery
                 }
             } else {
                 if (tax) {
@@ -40,8 +43,11 @@ arkaFood = (foodPrice, voucher, mileage, tax) => {
             }
         }
     } else {
-        let discount = foodPrice * (promo[0][1] / 100)
-        if (money > promo[1][2]) {
+        let discount = foodPrice * (promo[1][1] / 100)
+        if (discount > promo[1][3]) {
+            discount = promo[1][3]
+        }
+        if (foodPrice >= promo[1][2]) {
             if (mileage) {
                 if (tax) {
                     totalPay = foodPrice - discount + totalDelivery + foodTax
@@ -58,15 +64,15 @@ arkaFood = (foodPrice, voucher, mileage, tax) => {
         } else {
             if (mileage) {
                 if (tax) {
-                    totalPay = foodPrice - discount + totalDelivery + foodTax
+                    totalPay = foodPrice + totalDelivery + foodTax
                 } else {
-                    totalPay = foodPrice - discount + totalDelivery
+                    totalPay = foodPrice + totalDelivery
                 }
             } else {
                 if (tax) {
-                    totalPay = foodPrice - discount + foodTax
+                    totalPay = foodPrice + foodTax
                 } else {
-                    totalPay = foodPrice - discount
+                    totalPay = foodPrice
                 }
             }
         }
@@ -89,4 +95,5 @@ priceFormating = (idrFormat) => {
 };
 
 console.log(arkaFood(75000, 'ARKAFOOD5', 5, false));
+console.log(arkaFood(60000, 'DITRAKTIRDEMY', 7, true));
 
