@@ -13,6 +13,7 @@ How to Run :
 $ git clone https://github.com/AnjasSM/LogicTraining.git
 $ cd LogicTraining
 $ edit the input variable in every file with your own
+$ write in terminal word in below
 $ node soal1
 $ node soal2
 $ node soal3

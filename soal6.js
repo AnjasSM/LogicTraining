@@ -95,5 +95,5 @@ priceFormating = (idrFormat) => {
 };
 
 console.log(arkaFood(75000, 'ARKAFOOD5', 5, false));
-console.log(arkaFood(60000, 'DITRAKTIRDEMY', 7, true));
+console.log(arkaFood(25000, 'DITRAKTIRDEMY', 7, true));
 
